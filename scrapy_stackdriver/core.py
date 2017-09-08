@@ -36,7 +36,7 @@ class StackDriverLogger(object):
         if not crawler.settings.getbool("STACKDRIVER_ENABLED"):
             raise NotConfigured("Stackdriver not enabled")
 
-        project = crawler.settings.get("STACKDRIVER_PROJECT_NAME")
+        project = crawler.settings.get("STACKDRIVER_PROJECT_ID")
         ext = cls(project)
 
         crawler.signals.connect(ext.attach_log, signal=signals.spider_opened)
