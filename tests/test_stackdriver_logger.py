@@ -2,7 +2,6 @@
 # -*- coding: utf-8 -*-
 
 import unittest
-from scrapy.exceptions import NotConfigured
 from scrapy_stackdriver import StackDriverLogger
 
 class TestScrapyStackdriver(unittest.TestCase):
@@ -15,7 +14,7 @@ class TestScrapyStackdriver(unittest.TestCase):
     def test_requires_project_name(self):
         """The project name is required."""
 
-        self.assertRaises(NotConfigured, StackDriverLogger)
+        self.assertRaises(ValueError, StackDriverLogger, None)
 
 if __name__ == "__main__":
     unittest.main()

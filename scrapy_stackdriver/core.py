@@ -25,7 +25,7 @@ class StackDriverLogger(object):
         """
 
         if project is None:
-            raise NotConfigured("Missing Google project name")
+            raise ValueError("Missing Google project name")
 
         self.project = project
 
@@ -37,6 +37,10 @@ class StackDriverLogger(object):
             raise NotConfigured("Stackdriver not enabled")
 
         project = crawler.settings.get("STACKDRIVER_PROJECT_ID")
+
+        if project is None:
+            raise ValueError("STACKDRIVER_PROJECT_ID must be set")
+
         ext = cls(project)
 
         crawler.signals.connect(ext.attach_log, signal=signals.spider_opened)
